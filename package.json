@@ -1,0 +1,23 @@
+{
+  "name": "myapirest",
+  "version": "1.0.0",
+  "description": "Tentando criar um CRUD com Api Restful por conta própria",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FelipeDominguesB/MyApiRest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FelipeDominguesB/MyApiRest/issues"
+  },
+  "homepage": "https://github.com/FelipeDominguesB/MyApiRest#readme"
+}
