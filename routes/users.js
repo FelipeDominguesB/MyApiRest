@@ -6,27 +6,29 @@ let db = new NeDB({
 
 module.exports = (app) =>{
 
-    app.get('/usuarios', (request, response) =>{
-    response.statusCode = 200;
-    response.setHeader('Content-type', 'application/json');
+    let route = app.route('/usuarios');
 
-    response.json({
-        users: [
-            {nome: 'Felipe', idade: 19},
-            {nome: 'Julia', idade: 19},
-            {nome: 'Arthur', idade: 17},
-        ]
-    });
+    route.get((request, response) =>{
+        db.find({}).sort({name:1}).exec((err, usuarios) =>{
+            if(err) {
+                
+            }
+            else
+            {
+                response.statusCode = 200;
+                response.setHeader('Content-type', 'application/json');
+
+                response.json({usuarios});
+            }
+        });
+        
     });
 
-    app.post('/usuarios', (request, response) =>{
+    route.post((request, response) =>{
         
         db.insert(request.body, (err, usuario) =>{
             if(err) {
-                console.log(err);
-                response.status(400).json({
-                    error: err,
-                });
+                app.utils.error.send(err, request, response);
             }
             else
             {
@@ -34,5 +36,36 @@ module.exports = (app) =>{
             }
         });
     });
+
+    let routeID = app.route('/usuarios/:id');
+
+    routeID.get((req, res) =>{
+        db.findOne({_id: req.params.id}).exec((err, usuario) =>{
+            if(err)
+            {
+                app.utils.error.send(err, req, res);
+            }
+            else
+            {
+                res.status(200).json(usuario)
+            }
+
+        });
+    });
+
+    routeID.put((req, res) =>{
+        db.update({_id: req.params.id}, req.body, (err) => {
+            if(err)
+            {
+                app.utils.error.send(err, req, res);
+            }
+            else
+            {
+                res.status(200).json(Object.assign(req.params, req.body));
+            }
+
+        });
+    });
+
 
 };
