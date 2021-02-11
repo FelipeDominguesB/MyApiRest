@@ -1,7 +1,6 @@
-const express = require('express');
-let routes = express.Router();
+module.exports = (app) =>{
 
-routes.get('/', (request, response) =>{
+    app.get('/usuarios', (request, response) =>{
     response.statusCode = 200;
     response.setHeader('Content-type', 'application/json');
 
@@ -15,7 +14,7 @@ routes.get('/', (request, response) =>{
     })
 });
 
-routes.get('/admin', (request, response) =>{
+app.get('/usuarios/admin', (request, response) =>{
     response.statusCode = 200;
     response.setHeader('Content-type', 'application/json');
 
@@ -27,4 +26,4 @@ routes.get('/admin', (request, response) =>{
     })
 });
 
-module.exports = routes;
+};
