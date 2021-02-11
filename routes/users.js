@@ -14,16 +14,10 @@ module.exports = (app) =>{
     })
 });
 
-app.get('/usuarios/admin', (request, response) =>{
-    response.statusCode = 200;
-    response.setHeader('Content-type', 'application/json');
+app.post('/usuarios', (request, response) =>{
+    
 
-    response.json({
-        users: [
-            {nome: 'Felipe', idade: 19},
-        ]
-
-    })
+    response.json(request.body);
 });
 
 };
