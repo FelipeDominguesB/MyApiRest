@@ -1,23 +1,11 @@
 const express = require('express');
-
+let routesIndex = require('./routes/index');
+let routesUsers = require('./routes/users');
 const app = express();
 
+app.use(routesIndex);
+app.use('/usuarios', routesUsers);
 
-app.get('/', (request, response) =>{
-    response.statusCode = 200;
-    response.setHeader('Content-type', 'text/html');
-    response.end('<h1>Ola</h1>');  
-    console.log('url: ', request.url);
-    console.log('metodo: ', request.method);
-});
-
-app.post('/', (request, response) =>{
-    response.statusCode = 200;
-    response.setHeader('Content-type', 'text/html');
-    response.end('<h1>Tchau</h1>');  
-    console.log('url: ', request.url);
-    console.log('metodo: ', request.method);
-});
 
 app.listen(8080, '127.0.0.1', () =>{
     console.log('Servidor rodando');
